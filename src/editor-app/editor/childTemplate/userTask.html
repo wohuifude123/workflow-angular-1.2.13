@@ -1,0 +1,85 @@
+<div class="modal" ng-controller="StencilController">
+  <div class="modal-dialog" ng-style="{'width':morphShapes.nodeType == 'UserTask'?'880px':'880px'}" >
+    <div class="modal-content"  ng-controller="userTaskCtrl">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+        用户任务设置
+
+        <div class="modal-body">
+          <form class="form-horizontal" style='padding:5px 15px 0 15px'>
+            <!-- 用户任务 -->
+            <div style="height:450px">
+              <div style="margin-bottom: 10px;font-size: 15px;">
+                <ul class="nav nav-tabs">
+                  <li role="presentation" ng-class="acti==1?'active':''" ng-click='actived1(1)' >
+                    <a href="#">基本设置</a>
+                  </li>
+                  <li role="presentation" ng-class="acti==2?'active':''" ng-click='actived1(2)'>
+                    <a href="#">流转规则</a>
+                  </li>
+                  <li role="presentation" ng-class="acti==3?'active':''" ng-click='actived1(3)'><a href="#">执行规则</a></li>
+                  <li role="presentation" ng-class="acti==4?'active':''" ng-click='actived1(4)'><a href="#">加签规则</a></li>
+                  <li role="presentation" ng-class="acti==5?'active':''" ng-click='actived1(5)'><a href="#">回退规则</a></li>
+                  <!--  <li role="presentation" ng-class="acti==1?'active':''" ng-click='actived1(6)'>时效设置</li> -->
+                  <li role="presentation" ng-class="acti==7?'active':''" ng-click='actived1(7)'><a href="#">按钮设置</a></li>
+                  <li role="presentation" ng-class="acti==8?'active':''" ng-click='actived1(8)'><a href="#">通知规则</a></li>
+                  <!--  <li role="presentation" ng-class="acti==1?'active':''" ng-click='actived1(9)'>监听设置</li> -->
+                </ul>
+              </div>
+
+              <div ng-show='acti===1'>
+                <div class="formLine">
+                  <label for="" class="control-label">名称：</label>
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="任务名称" ng-model='userTaskValue.value.baisc.name'>
+                </div>
+
+                <div class="formLine">
+                  <label class="control-label vatop">描述：</label>
+                  <textarea type="text" class="form-control" placeholder="描述当前节点作用" ng-model='userTaskValue.value.baisc.desc' rows='4'></textarea>
+                </div>
+                <div>
+                  <label class="control-label vatop">待办描述：</label>
+                  <span class="vatop" style="color:#4190D9;" ng-click='setcheck()'>+选择变量</span>
+                </div>
+                <div class="formLine">
+                  <label class="control-label vatop"></label>
+                  <textarea type="text" rows='4' id='todoTaskDesc' class="form-control" placeholder="待办描述" ng-model='userTaskValue.value.baisc.todoTaskDesc' rows='4'></textarea>
+                </div>
+
+                <div class="formLine">
+                  <label class="control-label vatop">流程发起人：</label>
+                  <span style="display:inline-block;margin-top: 7px;">
+                    <input type="checkbox" ng-model='ischangeID'>
+                    <span style='color:red'>*注:流程发起后自动跳过，作为其他环节回退到此环节存在*</span>
+                  </span>
+                </div>
+              </div>
+
+              <div ng-show='acti===2'>
+                <div class="formLine">
+                  <label style="width: 85px;" class="text-right">驳回权限：</label>
+                  <select class='form-control' ng-model='userTaskValue.type' style="width: 66%;" ng-change="selectBackPoint();">
+                    <!-- <option value="beforeHandler">之前经过的节点</option>
+                    <option value="startUser">发起人</option> -->
+                    <option ng-repeat="item in UserTaskRejectNodeType" value="{{item.value}}">{{item.text}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div ng-show='acti===3'>
+                <div ng-click="getRejectType()">
+                  获取驳回权限值
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
